@@ -49,6 +49,9 @@ type computeJSON struct {
 	VMScaleSetName    string `json:"vmScaleSetName"`
 	SubscriptionID    string `json:"subscriptionId"`
 	ResourceGroupName string `json:"resourceGroupName"`
+	OSProfile         struct {
+		ComputerName string `json:"computerName"`
+	} `json:"osProfile"`
 }
 
 const (
@@ -110,7 +113,7 @@ func (a *AzureAuth) Login(ctx context.Context, client *api.Client) (*api.Secret,
 	loginData := map[string]interface{}{
 		"role":                a.roleName,
 		"jwt":                 jwtResp,
-		"vm_name":             metadataRespJSON.Compute.VMName,
+		"vm_name":             metadataRespJSON.Compute.OSProfile.ComputerName,
 		"vmss_name":           metadataRespJSON.Compute.VMScaleSetName,
 		"subscription_id":     metadataRespJSON.Compute.SubscriptionID,
 		"resource_group_name": metadataRespJSON.Compute.ResourceGroupName,
