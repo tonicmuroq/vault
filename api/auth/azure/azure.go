@@ -113,7 +113,7 @@ func (a *AzureAuth) Login(ctx context.Context, client *api.Client) (*api.Secret,
 	loginData := map[string]interface{}{
 		"role":                a.roleName,
 		"jwt":                 jwtResp,
-		"vm_name":             metadataRespJSON.Compute.OSProfile.ComputerName,
+		"vm_name":             "",
 		"vmss_name":           metadataRespJSON.Compute.VMScaleSetName,
 		"subscription_id":     metadataRespJSON.Compute.SubscriptionID,
 		"resource_group_name": metadataRespJSON.Compute.ResourceGroupName,
